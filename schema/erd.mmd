@@ -5,29 +5,30 @@ erDiagram
     GENRES ||--o{ MOVIE_GENRES : tags
 
     USERS {
-        bigint user_id PK
+        integer user_id PK
         varchar display_name
-        timestamptz joined_at
+        varchar email UK
+        timestamp joined_at
     }
     MOVIES {
-        bigint movie_id PK
+        integer movie_id PK
         varchar title
-        smallint release_year
-        smallint runtime_minutes
+        integer release_year
+        integer runtime_minutes
         boolean is_active
     }
     RATINGS {
-        bigint rating_id PK
-        bigint user_id FK
-        bigint movie_id FK
-        timestamptz rated_at
-        smallint score
+        integer rating_id PK
+        integer user_id FK
+        integer movie_id FK
+        timestamp rated_at
+        numeric score
     }
     GENRES {
-        bigint genre_id PK
-        varchar name
+        integer genre_id PK
+        varchar name UK
     }
     MOVIE_GENRES {
-        bigint movie_id PK, FK
-        bigint genre_id PK, FK
+        integer movie_id PK, FK
+        integer genre_id PK, FK
     }

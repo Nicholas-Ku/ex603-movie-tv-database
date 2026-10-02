@@ -14,7 +14,7 @@ Three rules stay with the application. A new rating should only be accepted for 
 
 ## Reflection
 
-The requirements did not say whether a user can rate the same movie more than once. A different designer could reasonably let ratings pile up as a history, so a user who rated a film 6 in 2024 and 9 in 2026 has two rows, and the current opinion is the latest one.
+The requirements did not say whether a user can rate the same movie more than once. A different designer could reasonably let ratings pile up as a history, so a user who rated a film 3.0 in 2024 and 4.5 in 2026 has two rows, and the current opinion is the latest one.
 
 I chose one rating per user per movie, enforced by a UNIQUE constraint, with a re-rating written as an UPDATE to the existing row. The reads this platform will face most are averages per movie, rating counts, and top-rated lists. With one row per pair, each of those is a plain aggregate over the ratings table. With history, each of those queries would first have to pick every user's latest row, which adds a window function or subquery to the busiest read path, and forgetting it quietly counts some people twice.
 

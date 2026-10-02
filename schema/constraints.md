@@ -1,6 +1,6 @@
 # Integrity Constraints (Task 1.3)
 
-Every constraint below is meant to be declared in the schema, so that invalid data is rejected no matter which application, script, or manual query writes it. The DDL itself comes in Unit 2.
+Every constraint below is declared in [schema.sql](schema.sql), so that invalid data is rejected no matter which application, script, or manual query writes it. The Unit 2 write-up in [analysis/unit2.md](../analysis/unit2.md) explains how each one behaves.
 
 ## Primary keys
 
@@ -27,18 +27,19 @@ ON UPDATE keeps the default (NO ACTION), because surrogate keys are never change
 
 | Relation | Columns |
 |---|---|
-| `users` | `display_name`, `joined_at` |
+| `users` | `display_name`, `email`, `joined_at` |
 | `movies` | `title`, `release_year`, `runtime_minutes`, `is_active` |
 | `ratings` | `user_id`, `movie_id`, `rated_at`, `score` |
 | `genres` | `name` |
 | `movie_genres` | `movie_id`, `genre_id` (implied by the primary key) |
 
-Every column in the schema is required. Nothing in the requirements calls for an unknown value, so NULL never needs to carry meaning here. A missing score, for instance, would be a rating that says nothing.
+Every column is required. Nothing in the requirements calls for an unknown value, so NULL never needs to carry meaning here. A missing score, for instance, would be a rating that says nothing.
 
 ## UNIQUE
 
 | Constraint | Justification |
 |---|---|
+| `users(email)` | Two accounts on one email would make it impossible to tell whose account is whose. |
 | `genres(name)` | Two genres with the same name would split one category in half and break counts by genre. |
 | `ratings(user_id, movie_id)` | A user holds at most one rating per movie, so averages count each person once. A re-rating updates the existing row. |
 | `movies(title, release_year)` | Catches an accidental duplicate import of the same film. The pair is not a safe primary key, but it is a useful guard. |
@@ -47,10 +48,11 @@ Every column in the schema is required. Nothing in the requirements calls for an
 
 | Constraint | Rule | Justification |
 |---|---|---|
-| `ratings.score` | `score BETWEEN 1 AND 10` | A score outside the scale would distort every average. |
+| `ratings.score` | `score BETWEEN 0.50 AND 5.00` | A score outside the scale would distort every average. |
 | `movies.release_year` | `release_year BETWEEN 1888 AND 2100` | The first surviving film dates to 1888. The upper bound allows announced future releases. |
 | `movies.runtime_minutes` | `runtime_minutes BETWEEN 1 AND 1000` | A zero or negative runtime is impossible, and the upper bound catches unit mistakes such as seconds entered as minutes. |
 | `genres.name` | `length(trim(name)) > 0` | Blocks a genre made of blank space. |
+| `users.email` | `email LIKE '%_@_%'` | Blocks values with no at sign. This is a basic shape check, not full validation. |
 | `users.display_name` | `length(trim(display_name)) > 0` | Blocks a blank display name. |
 | `movies.title` | `length(trim(title)) > 0` | Blocks a blank title. |
 
@@ -62,7 +64,7 @@ Every column in the schema is required. Nothing in the requirements calls for an
 | `ratings.rated_at` | `now()` |
 | `movies.is_active` | `TRUE` |
 
-## Supporting indexes (planned for Unit 2)
+## Supporting indexes
 
 The primary key on `movie_genres` covers lookups by movie. A second index on `movie_genres(genre_id)` covers lookups by genre. An index on `ratings(movie_id)` covers per-movie aggregates, because the UNIQUE index on (`user_id`, `movie_id`) only helps when `user_id` is known.
 

@@ -10,7 +10,7 @@ Theme: Movie / TV. The five roles map to relations as follows.
 | catalog | `genres` |
 | junction | `movie_genres` |
 
-Domains use PostgreSQL types. Primary key attributes are marked PK and foreign key attributes are marked FK.
+Domains use PostgreSQL types, as built in [schema.sql](schema.sql). Primary key attributes are marked PK and foreign key attributes are marked FK.
 
 ## users (actor)
 
@@ -18,11 +18,14 @@ A person who rates movies on the platform.
 
 | Attribute | Domain | Notes |
 |---|---|---|
-| `user_id` | BIGINT, system generated | PK |
+| `user_id` | INTEGER, system generated (identity) | PK |
 | `display_name` | VARCHAR(100) | Required. Not unique, because two people can choose the same name. |
-| `joined_at` | TIMESTAMPTZ | Required. Defaults to the time of insert. |
+| `email` | VARCHAR(255) | Required. Unique, with a basic format check. |
+| `joined_at` | TIMESTAMP | Required. Defaults to the time of insert. |
 
 **Primary key:** `user_id`
+
+**Alternate key:** `email`
 
 ## movies (producer)
 
@@ -30,10 +33,10 @@ A title in the catalogue that users can rate.
 
 | Attribute | Domain | Notes |
 |---|---|---|
-| `movie_id` | BIGINT, system generated | PK |
+| `movie_id` | INTEGER, system generated (identity) | PK |
 | `title` | VARCHAR(200) | Required. |
-| `release_year` | SMALLINT, 1888 to 2100 | Required. |
-| `runtime_minutes` | SMALLINT, 1 to 1000 | Required. The numeric attribute used for filtering. |
+| `release_year` | INTEGER, 1888 to 2100 | Required. |
+| `runtime_minutes` | INTEGER, 1 to 1000 | Required. The numeric attribute used for filtering. |
 | `is_active` | BOOLEAN | Required. Defaults to TRUE. FALSE means the movie is retired and no longer open for new ratings. |
 
 **Primary key:** `movie_id`
@@ -44,11 +47,11 @@ One rating action by one user on one movie. This is the high-volume fact table.
 
 | Attribute | Domain | Notes |
 |---|---|---|
-| `rating_id` | BIGINT, system generated | PK |
-| `user_id` | BIGINT | FK to `users.user_id`. Required. |
-| `movie_id` | BIGINT | FK to `movies.movie_id`. Required. |
-| `rated_at` | TIMESTAMPTZ | Required. Defaults to the time of insert. |
-| `score` | SMALLINT, 1 to 10 | Required. The metric that gets aggregated. |
+| `rating_id` | INTEGER, system generated (identity) | PK |
+| `user_id` | INTEGER | FK to `users.user_id`. Required. |
+| `movie_id` | INTEGER | FK to `movies.movie_id`. Required. |
+| `rated_at` | TIMESTAMP | Required. Defaults to the time of insert. |
+| `score` | NUMERIC(3,2), 0.50 to 5.00 | Required. The metric that gets aggregated. |
 
 **Primary key:** `rating_id`
 
@@ -60,7 +63,7 @@ A category that classifies movies.
 
 | Attribute | Domain | Notes |
 |---|---|---|
-| `genre_id` | BIGINT, system generated | PK |
+| `genre_id` | INTEGER, system generated (identity) | PK |
 | `name` | VARCHAR(50) | Required. Unique. |
 
 **Primary key:** `genre_id`
@@ -73,8 +76,8 @@ The many-to-many link between movies and genres.
 
 | Attribute | Domain | Notes |
 |---|---|---|
-| `movie_id` | BIGINT | FK to `movies.movie_id`. Part of the PK. |
-| `genre_id` | BIGINT | FK to `genres.genre_id`. Part of the PK. |
+| `movie_id` | INTEGER | FK to `movies.movie_id`. Part of the PK. |
+| `genre_id` | INTEGER | FK to `genres.genre_id`. Part of the PK. |
 
 **Primary key:** composite (`movie_id`, `genre_id`)
 
