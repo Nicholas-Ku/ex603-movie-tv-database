@@ -1,0 +1,33 @@
+erDiagram
+    USERS ||--o{ RATINGS : submits
+    MOVIES ||--o{ RATINGS : gets
+    MOVIES ||--o{ MOVIE_GENRES : has
+    GENRES ||--o{ MOVIE_GENRES : tags
+
+    USERS {
+        bigint user_id PK
+        varchar display_name
+        timestamptz joined_at
+    }
+    MOVIES {
+        bigint movie_id PK
+        varchar title
+        smallint release_year
+        smallint runtime_minutes
+        boolean is_active
+    }
+    RATINGS {
+        bigint rating_id PK
+        bigint user_id FK
+        bigint movie_id FK
+        timestamptz rated_at
+        smallint score
+    }
+    GENRES {
+        bigint genre_id PK
+        varchar name
+    }
+    MOVIE_GENRES {
+        bigint movie_id PK, FK
+        bigint genre_id PK, FK
+    }
