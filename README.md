@@ -44,6 +44,20 @@ Create an empty database, then run the script from the `schema` folder. It drops
 psql -d your_database -v ON_ERROR_STOP=1 -f schema/schema.sql
 ```
 
+## Unit 3: Interrogating the Data
+
+Unit 3 uses the course's provided Movie / TV dataset, not the Unit 2 schema above. The scenario is a dashboard that reported about half of all ratings ending as spam withdrawals, which led to a frozen reviewer payout. The queries show that the real rate is 6 percent, and that the dashboard's number came from ratings with a blank withdrawal reason being dropped silently from the total.
+
+To run the queries, create a database named `ex603_data` and load the course's `movies.sql` into it. That file comes from the course and is not stored in this repository. Then run each file from the repository root. `q3_2.sql` contains one query that fails on purpose, so run it without `ON_ERROR_STOP`.
+
+```bash
+createdb -U postgres ex603_data
+psql -U postgres -d ex603_data -f movies.sql
+psql -U postgres -d ex603_data -f queries/unit3/q3_1.sql
+psql -U postgres -d ex603_data -f queries/unit3/q3_2.sql
+psql -U postgres -d ex603_data -f queries/unit3/q3_3.sql
+```
+
 ## Contents
 
 | Path | What it holds |
@@ -53,5 +67,8 @@ psql -d your_database -v ON_ERROR_STOP=1 -f schema/schema.sql
 | [schema/constraints.md](schema/constraints.md) | Integrity constraints and the ON DELETE choice for each foreign key |
 | [analysis/unit1.md](analysis/unit1.md) | Unit 1 modelling justification and reflection |
 | [analysis/unit2.md](analysis/unit2.md) | Unit 2 constraints table, CHECK narrative, and what changed from Unit 1 |
-| `queries/` | Empty until a later unit |
-| [screenshots/](screenshots/) | Execution evidence |
+| [analysis/unit3-finding.md](analysis/unit3-finding.md) | Unit 3 memo to the dashboard team |
+| [queries/unit3/q3_1.sql](queries/unit3/q3_1.sql) | Unit 3 exploration queries |
+| [queries/unit3/q3_2.sql](queries/unit3/q3_2.sql) | Unit 3 broken queries, the dropped-row count, and the repairs |
+| [queries/unit3/q3_3.sql](queries/unit3/q3_3.sql) | Unit 3 three equivalent forms and the proof that they match |
+| [screenshots/](screenshots/) | Execution evidence for Units 2 and 3 |
