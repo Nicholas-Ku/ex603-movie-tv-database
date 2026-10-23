@@ -58,6 +58,29 @@ psql -U postgres -d ex603_data -f queries/unit3/q3_2.sql
 psql -U postgres -d ex603_data -f queries/unit3/q3_3.sql
 ```
 
+## Unit 4: Measuring the Platform
+
+Unit 4 continues on the same `ex603_data` database. The follow-up question from leadership was what the real failure rate is and which movies contribute most to it. The answer is a 6 percent platform rate (12 spam withdrawals out of 200 ratings), with movies 2 and 3 well above the typical rate for movies with at least 10 ratings. Producers are reported by `movie_id`, not by title. Both files run top to bottom without errors.
+
+```bash
+psql -U postgres -d ex603_data -f queries/unit4/q4_1.sql
+psql -U postgres -d ex603_data -f queries/unit4/q4_2.sql
+```
+
+### Query catalogue
+
+| Query | Business question it answers |
+|---|---|
+| 4.1a | Across every rating, what are the count, total, average, minimum, maximum, and number of distinct users and movies? |
+| 4.1a follow-up | Which ratings sit at the lowest and highest score, and does the average change by status? |
+| 4.1b | How many ratings does each movie have and what is its average score, from most rated to least? |
+| 4.1c | Which movies have at least 10 ratings, so that a rate computed for them means something? |
+| 4.1d | For each region and rating status, how many ratings are there and what do their scores look like? |
+| 4.2A | For each movie, how many ratings did it receive and how many were spam withdrawals, in one pass? |
+| 4.2B | What are the ratings and spam withdrawals per region, and for the platform as a whole, without detail rows? |
+| 4.2C-1 | Among movies with at least 10 ratings, what is the baseline spam rate? |
+| 4.2C-2 | Which high-volume movies sit above that baseline, and by how many points? |
+
 ## Contents
 
 | Path | What it holds |
@@ -71,4 +94,8 @@ psql -U postgres -d ex603_data -f queries/unit3/q3_3.sql
 | [queries/unit3/q3_1.sql](queries/unit3/q3_1.sql) | Unit 3 exploration queries |
 | [queries/unit3/q3_2.sql](queries/unit3/q3_2.sql) | Unit 3 broken queries, the dropped-row count, and the repairs |
 | [queries/unit3/q3_3.sql](queries/unit3/q3_3.sql) | Unit 3 three equivalent forms and the proof that they match |
-| [screenshots/](screenshots/) | Execution evidence for Units 2 and 3 |
+| [analysis/unit4.md](analysis/unit4.md) | Unit 4 write-ups for Tasks 4.1 and 4.2, plus the reflection |
+| [analysis/unit4-finding.md](analysis/unit4-finding.md) | Unit 4 breakdown for the leadership team |
+| [queries/unit4/q4_1.sql](queries/unit4/q4_1.sql) | Unit 4 baseline, per-movie, HAVING, and two-dimension queries |
+| [queries/unit4/q4_2.sql](queries/unit4/q4_2.sql) | Unit 4 conditional aggregation, ROLLUP, and the two-step pipeline |
+| [screenshots/](screenshots/) | Execution evidence for Units 2, 3 and 4 |
