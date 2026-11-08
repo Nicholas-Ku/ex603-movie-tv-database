@@ -81,6 +81,29 @@ psql -U postgres -d ex603_data -f queries/unit4/q4_2.sql
 | 4.2C-1 | Among movies with at least 10 ratings, what is the baseline spam rate? |
 | 4.2C-2 | Which high-volume movies sit above that baseline, and by how many points? |
 
+## Unit 5: Joining the Data
+
+Unit 5 also runs on `ex603_data`. Leadership asked who the high-failure producers are and what might explain them. Movies 2 and 3 are the two Assignment 4 producers. They both carry the Comedy tag and were released in 2023, and four of the five movies released in 2023 sit above the baseline spam rate. The outer joins also found two producers that every earlier report left out, movies 14 and 15, which have never received a rating. All three files run top to bottom without errors.
+
+```bash
+psql -U postgres -d ex603_data -f queries/unit5/q5_1.sql
+psql -U postgres -d ex603_data -f queries/unit5/q5_2.sql
+psql -U postgres -d ex603_data -f queries/unit5/q5_3.sql
+```
+
+### Query catalogue
+
+| Query | Business question it answers |
+|---|---|
+| 5.1A | Which user rated which movie, and when? |
+| 5.1B | Which movies carry the Comedy tag, and which genres do movies 2 and 3 share? |
+| 5.1C | How do movies released in the same year compare on rating volume and spam rate? |
+| 5.2A | Which producers does an inner join leave out compared with a left join, and how many? |
+| 5.2B | Do a right join and a full outer join agree with the left join, and is any rating missing its movie? |
+| 5.2C | Which producers have never had a rating, found with NOT EXISTS and with EXCEPT? |
+| 5.3A | What do 5 genres crossed with 15 movies produce, does the count equal 5 x 15, and how many of the 75 pairs are actually tagged? |
+| 5.3B | Which join algorithms does PostgreSQL use for the three-table join in 5.1A? |
+
 ## Contents
 
 | Path | What it holds |
@@ -98,4 +121,9 @@ psql -U postgres -d ex603_data -f queries/unit4/q4_2.sql
 | [analysis/unit4-finding.md](analysis/unit4-finding.md) | Unit 4 breakdown for the leadership team |
 | [queries/unit4/q4_1.sql](queries/unit4/q4_1.sql) | Unit 4 baseline, per-movie, HAVING, and two-dimension queries |
 | [queries/unit4/q4_2.sql](queries/unit4/q4_2.sql) | Unit 4 conditional aggregation, ROLLUP, and the two-step pipeline |
-| [screenshots/](screenshots/) | Execution evidence for Units 2, 3 and 4 |
+| [analysis/unit5.md](analysis/unit5.md) | Unit 5 write-ups for Tasks 5.1 to 5.3, the execution plan, and the reflection |
+| [analysis/unit5-finding.md](analysis/unit5-finding.md) | Unit 5 recommendations for the leadership team |
+| [queries/unit5/q5_1.sql](queries/unit5/q5_1.sql) | Unit 5 three-table join, junction traversal, and self join |
+| [queries/unit5/q5_2.sql](queries/unit5/q5_2.sql) | Unit 5 inner, left, right and full outer joins, NOT EXISTS, and EXCEPT |
+| [queries/unit5/q5_3.sql](queries/unit5/q5_3.sql) | Unit 5 CROSS JOIN and the EXPLAIN statements |
+| [screenshots/](screenshots/) | Execution evidence for Units 2, 3, 4 and 5 |
