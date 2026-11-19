@@ -1,4 +1,6 @@
 -- EX 603 Unit 5, Task 5.1: Connect producers to their data
+-- Question: who rated which movie and when, which genres do the high-spam
+-- movies share, and how do movies from the same year compare?
 -- Database: ex603_data (loaded from movies.sql)
 -- Roles: actor = users, producer = movies, event = ratings, catalog = genres,
 -- junction = movie_genres. Producers are reported by movie_id, with the title

@@ -1,4 +1,6 @@
 -- EX 603 Unit 5, Task 5.3: Understand join performance and execution plans
+-- Question: what does a Cartesian product produce on this data, and how does
+-- PostgreSQL actually run the three-table join?
 -- Database: ex603_data (loaded from movies.sql)
 -- Everything here is read-only, so EXPLAIN ANALYZE is safe to run.
 

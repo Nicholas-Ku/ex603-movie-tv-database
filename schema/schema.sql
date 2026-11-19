@@ -1,6 +1,9 @@
 -- =================================================================
 -- EX 603 Assignment 2 - schema.sql
 -- Theme: Movie / TV
+-- Task: Unit 2, build the Unit 1 design as a working database.
+-- Question: which tables, keys and constraints make an invalid rating
+-- impossible to store, whichever program writes the data?
 -- Author: Nicholas Ku
 -- Target: PostgreSQL 14+
 -- =================================================================

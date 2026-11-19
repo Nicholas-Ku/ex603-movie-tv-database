@@ -1,0 +1,53 @@
+erDiagram
+    USERS |o--o{ USERS : invites
+    USERS ||--o{ RATINGS : submits
+    MOVIES ||--o{ RATINGS : receives
+    MOVIES ||--o{ MOVIE_GENRES : "tagged with"
+    GENRES ||--o{ MOVIE_GENRES : classifies
+    MOVIES ||--o{ MOVIE_LANGUAGES : "offered in"
+
+    USERS {
+        int user_id PK
+        varchar user_name
+        date signup_date
+        varchar country
+        varchar email UK
+        int invited_by FK
+        boolean is_active
+    }
+    MOVIES {
+        int movie_id PK
+        varchar title
+        date added_on
+        varchar origin_country
+        varchar imdb_code UK
+        smallint release_year
+        boolean is_available
+    }
+    RATINGS {
+        bigint rating_id PK
+        int user_id FK
+        int movie_id FK
+        timestamp rated_at
+        timestamp reviewed_at
+        varchar device_country
+        decimal score
+        decimal watch_minutes
+        decimal weight
+        varchar rating_status
+        varchar withdrawn_reason
+    }
+    GENRES {
+        int genre_id PK
+        varchar genre_name UK
+        varchar genre_description
+    }
+    MOVIE_GENRES {
+        int movie_id PK, FK
+        int genre_id PK, FK
+        date tagged_on
+    }
+    MOVIE_LANGUAGES {
+        int movie_id PK, FK
+        char language_code PK
+    }

@@ -1,4 +1,6 @@
 -- EX 603 Unit 3, Task 3.2: Find the bug
+-- Question: why did the dashboard's spam rate come out near half, and how
+-- should the filter be written so no rating drops out of the total?
 -- Database: ex603_data (loaded from movies.sql)
 -- Failure state for this theme: a spam withdrawal, meaning a rating whose
 -- rating_status is withdrawn and whose withdrawn_reason is Spam detected.

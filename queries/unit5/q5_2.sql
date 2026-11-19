@@ -1,4 +1,6 @@
 -- EX 603 Unit 5, Task 5.2: Find records that joins may exclude
+-- Question: which movies do inner-join reports leave out, and which movies
+-- have never been rated?
 -- Database: ex603_data (loaded from movies.sql)
 -- Producers are movies and events are ratings. Producers are counted by
 -- movie_id so a movie with many ratings is still one producer.

@@ -1,4 +1,6 @@
 -- EX 603 Unit 4, Task 4.1: Measure the platform
+-- Question: what does the platform look like in totals, per movie and per
+-- region, and which movies have enough ratings to judge?
 -- Database: ex603_data (loaded from movies.sql)
 -- Theme: Movie / TV. Actor = users, producer = movies, event = ratings.
 -- Metric: ratings.score. Failure state: a spam withdrawal, meaning a rating

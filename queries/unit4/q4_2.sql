@@ -1,4 +1,6 @@
 -- EX 603 Unit 4, Task 4.2: Build the breakdown leadership asked for
+-- Question: what is the real spam rate for each movie and region, and which
+-- movies sit above the typical rate?
 -- Database: ex603_data (loaded from movies.sql)
 -- Failure state for this theme: a spam withdrawal, meaning a rating whose
 -- rating_status is withdrawn and whose withdrawn_reason is Spam detected.

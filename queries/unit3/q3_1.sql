@@ -1,4 +1,6 @@
 -- EX 603 Unit 3, Task 3.1: Establish what the data contains
+-- Question: what does the ratings data actually contain, and which statuses,
+-- reasons and missing values does a report on it have to handle?
 -- Database: ex603_data (loaded from movies.sql)
 -- Theme: Movie / TV. Actor = users, producer = movies, event = ratings,
 -- catalog = genres, junction = movie_genres.
