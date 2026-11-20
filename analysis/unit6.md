@@ -36,7 +36,7 @@ Across all movies, 67 of the 187 rating-to-rating changes are 2.5 points or more
 
 A plain SUM gives one number, 200 ratings for 2023. The running total keeps every day and shows how the platform got to 200. I set a target of 240 ratings for the year, or 20 a month. The running total was ahead of that pace after January and February, fell 16 short by the end of April, and never caught up. The year finished at 83 percent of the target, 40 ratings short.
 
-The shape of the running total matters more than the final number. The platform didn't miss the target by being slow all year. Most of the ground was lost in March and April, when only 11 ratings arrived each month, and the rest went slowly after that. A plain SUM of 200 can't tell those two stories apart, and they lead to different fixes.
+The shape of the running total matters more than the final number, because the shortfall came from two different problems. March and April alone lost 18 ratings against the target, since only 11 ratings arrived in each of those months, which turned a lead of 2 into a gap of 16. After April, seven of the eight remaining months came in under 20, and those smaller misses added up to another 24. A plain SUM of 200 can't separate a sudden drop from a slow leak, and the two need different fixes.
 
 ### Why a window of 30 ratings
 
