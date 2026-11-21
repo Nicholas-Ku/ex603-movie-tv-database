@@ -161,7 +161,7 @@ The biggest limitation is size. The whole year has 12 spam withdrawals, so every
 
 ## Video presentation
 
-**[Watch the video presentation](VIDEO_URL)**, a short walkthrough of the key queries, the findings, and what I would do next quarter.
+**[Watch the video presentation](https://drive.google.com/file/d/1Rz-6kF000d1AXMCrDsDE8UNXjviFxyWg/view)**, a short walkthrough of the key queries, the findings, and what I would do next quarter.
 
 ## How to run it
 
